@@ -1,5 +1,20 @@
 # SSI-P03
 # Práctica 3: Generador CHACHA20
+
+## Cómo compilar y ejecutar el programa
+> [!WARNING]
+> Es necesario tener instalado **'make'** y **'cmake'**. Además de **'g++'** y **'gcc'**.
+```bash
+$ make clean
+$ make build
+$ ./build/bin/CHACHA20
+```
+ó
+```bash
+$ make reload
+$ ./build/bin/CHACHA20
+```
+
 ## Objetivo
 Implementar el Generador ChaCha20 usado en SSL/TLS.
 
