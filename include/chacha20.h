@@ -23,6 +23,7 @@ class ChaCha20 {
   void SaveResultsToFile(const std::string& filename);
 
   void QuarterRound(uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d);
+  static uint32_t ToLittleEndian(uint32_t value);
 
  private:
   State state_;
