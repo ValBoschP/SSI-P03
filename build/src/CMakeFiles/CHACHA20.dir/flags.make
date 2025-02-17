@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DCHACHA20_EXPORTS
 
-CXX_INCLUDES = -I/home/valeria/repos/Clases/SSI/SSI-P03/src/. -I/home/valeria/repos/Clases/SSI/SSI-P03/include
+CXX_INCLUDES = -I/home/valer/SSI/SSI-P03/src/. -I/home/valer/SSI/SSI-P03/include
 
 CXX_FLAGS = -g
 

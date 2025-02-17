@@ -1,6 +1,7 @@
 #include "chacha20.h"
 
 #include <iostream>
+#include <fstream>
 
 ChaCha20::ChaCha20(const std::array<uint32_t, 8>& key, uint32_t counter,
                    const std::array<uint32_t, 3>& nonce) {
@@ -33,8 +34,36 @@ void ChaCha20::GenerateBlock() {
 }
 
 void ChaCha20::PrintState() const {
-  for (auto val : state_) {
-    std::cout << std::hex << val << " ";
+  for (int i = 0; i < 16; ++i) {
+    std::cout << std::hex << state_[i] << " ";
   }
   std::cout << std::endl;
+}
+
+void ChaCha20::SaveResultsToFile(const std::string& filename) {
+  std::ofstream file(filename);
+  if (!file) {
+    std::cerr << "ERROR: Cannot open file." << std::endl;
+    return;
+  }
+  file << "- Estado inicial:\n";
+  for (int i = 0; i < 16; ++i) {
+    if (i % 4 == 0 && i != 0) file << "\n";
+    file << std::hex << state_[i] << " ";
+  }
+  file << "\n\n";
+  file << "- Estado final tras las 20 iteraciones:\n";
+  GenerateBlock();
+  for (int i = 0; i < 16; ++i) {
+    if (i % 4 == 0 && i != 0) file << "\n";
+    file << std::hex << state_[i] << " ";
+  }
+  file << "\n\n";
+  file << "- Estado de salida del generador:\n";
+  for (int i = 0; i < 16; ++i) {
+    if (i % 4 == 0 && i != 0) file << "\n";
+    file << std::hex << state_[i] << " ";
+  }
+  file << "\n";
+  file.close();
 }

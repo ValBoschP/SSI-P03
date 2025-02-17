@@ -1,4 +1,4 @@
-# Install script for directory: /home/valeria/repos/Clases/SSI/SSI-P03/src
+# Install script for directory: /home/valer/SSI/SSI-P03/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

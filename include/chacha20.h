@@ -4,6 +4,7 @@
 #include <array>
 #include <cstdint>
 #include <vector>
+#include <string>
 
 static const int kRounds = 20;
 using State = std::array<uint32_t, 16>;
@@ -19,6 +20,7 @@ class ChaCha20 {
   // Methods
   void GenerateBlock();
   void PrintState() const;
+  void SaveResultsToFile(const std::string& filename);
 
   void QuarterRound(uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d);
 

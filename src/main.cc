@@ -10,6 +10,7 @@ int main() {
   std::array<uint32_t, 3> nonce;
   int option;
   ChaCha20* chacha = nullptr;
+  std::string filename;
 
   do {
     Menu();
@@ -18,50 +19,46 @@ int main() {
 
     switch (option) {
       case 1:
-        std::cout << "Introduce keys (8 hexadecimal values): ";
-        for (auto& k : key) {
-          std::cout << std::endl << "Key " << std::distance(&key[0], &k) + 1 << ": ";
-          std::cin >> std::hex >> k;
+        for (int i = 0; i < 8; ++i) {
+          std::cout << "Key " << i << ": ";
+          std::cin >> std::hex >> key[i];
         }
-        std::cout << "Introduce counter (1 hexadecimal value): ";
+        std::cout << "Counter: ";
         std::cin >> std::hex >> counter;
-        std::cout << "Introduce nonce (3 hexadecimal values): ";
-        for (auto& n : nonce) {
-          std::cout << std::endl << "Nonce " << std::distance(&nonce[0], &n) + 1 << ": ";
-          std::cin >> std::hex >> n;
+        for (int i = 0; i < 3; ++i) {
+          std::cout << "Nonce " << i << ": ";
+          std::cin >> std::hex >> nonce[i];
         }
-        delete chacha;
-        std::cout << "Data entered successfully!\n";
         chacha = new ChaCha20(key, counter, nonce);
-        std::cout << std::endl << "Press ENTER to continue...";
-        std::cin.get();
+        std::cout << "Values introduced successfully.\n";
         break;
       case 2:
-        if (chacha) {
-          chacha->GenerateBlock();
-        } else {
-          std::cout << "Must introduce data first (option 1).\n";
-        }
+        std::cout << "Filename: ";
+        std::cin >> filename;
+        ReadFromFile(filename, key, counter, nonce);
+        chacha = new ChaCha20(key, counter, nonce);
+        std::cout << "File read successfully.\n";
         break;
       case 3:
-        if (chacha) {
-          chacha->PrintState();
-        } else {
-          std::cout << "Must introduce data first (option 1).\n";
+        if (chacha == nullptr) {
+          std::cout << "ERROR: No values introduced.\n";
+          break;
         }
+        std::cout << "Filename: ";
+        std::cin >> filename;
+        chacha->SaveResultsToFile(filename);
+        std::cout << "Results saved to file.\n";
         break;
       case 4:
         Help();
-        std::cout << std::endl << "Press ENTER to continue...";
-        std::cin.get();
         break;
       case 0:
-        break;  
+        std::cout << "Exiting...\n";
+        return;
       default:
-        std::cout << "Invalid Option.\n";
+        std::cout << "Invalid option.\n";
     }
   } while (option != 0);
-
   delete chacha;
   return 0;
 }
