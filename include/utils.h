@@ -5,8 +5,10 @@
 #include <cstdint>
 #include <string>
 
+#include "chacha20.h"
+
 void Menu();
 void Help();
-void ReadFromFile(const std::string& filename, std::array<uint32_t, 8>& key, uint32_t& counter, std::array<uint32_t, 3>& nonce);
+void PrintState(const std::array<uint32_t, kStateSize>& state);
 
 #endif

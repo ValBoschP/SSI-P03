@@ -5,29 +5,29 @@
 #include <cstdint>
 #include <vector>
 #include <string>
+#include <fstream>
 
-static const int kRounds = 20;
-using State = std::array<uint32_t, 16>;
+constexpr int kRounds = 20;
+constexpr int kStateSize = 16;
+constexpr int kKeySize = 8;
+constexpr int kNonceSize = 3;
 
 class ChaCha20 {
  public:
-  // Constructor
-  ChaCha20() {}
-  ChaCha20(const std::array<uint32_t, 8>& key, uint32_t counter,
-           const std::array<uint32_t, 3>& nonce);
-  // Getter
-  State GetState() const { return state_; };
-  // Methods
-  void GenerateBlock();
-  void PrintState() const;
-  void SaveResultsToFile(const std::string& filename);
+  ChaCha20(const std::array<uint32_t, kKeySize>& key,
+           uint32_t counter,
+           const std::array<uint32_t, kNonceSize>& nonce);
+           
+  void GenerateBlock(std::array<uint32_t, kStateSize>& output);
+  void RunRounds(std::array<uint32_t, kStateSize>& output);
 
-  void QuarterRound(uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d);
-  static uint32_t ToLittleEndian(uint32_t value);
+  const std::array<uint32_t, kStateSize>& GetState() const { return state_; }
 
  private:
-  State state_;
+  void QuarterRound(uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d);
+  void InnerBlock(std::array<uint32_t, kStateSize>& state);
+
+  std::array<uint32_t, kStateSize> state_;
 };
 
-
-#endif
+#endif  // CHACHA20_H

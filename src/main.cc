@@ -2,67 +2,66 @@
 #include "utils.h"
 
 #include <iostream>
+#include <iomanip>
 
+void PrintState(const std::array<uint32_t, kStateSize>& state) {
+  for (int i = 0; i < 4; ++i) {
+    for (int j = 0; j < 4; ++j) {
+      std::cout << std::hex << std::setw(8) << std::setfill('0')
+                << state[i * 4 + j] << " ";
+    }
+    std::cout << "\n";
+  }
+  std::cout << "\n";
+}
 
 int main() {
-  std::array<uint32_t, 8> key;
-  uint32_t counter;
-  std::array<uint32_t, 3> nonce;
+  
+  std::array<uint32_t, kKeySize> key_test = {0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c,
+                                        0x13121110, 0x17161514, 0x1b1a1918, 0x1f1e1d1c};
+  uint32_t counter_test = 1;
+  std::array<uint32_t, kNonceSize> nonce_test = {0x09000000, 0x4a000000, 0x00000000};
+
+  ChaCha20 chacha(key_test, counter_test, nonce_test);
+  std::array<uint32_t, kStateSize> output;
+  
   int option;
-  ChaCha20* chacha = nullptr;
   std::string filename;
 
-  do { 
+  do {
     Menu();
-    std::cout << "Choose option: ";
+    std::cout << "Option: ";
     std::cin >> option;
-
     switch (option) {
+      // Input file data chacha20
       case 1:
-        system("clear");
-        for (int i = 0; i < 8; ++i) {
-          std::cout << "Key " << i << ": ";
-          std::cin >> std::hex >> key[i];
-        }
-        std::cout << "Counter: ";
-        std::cin >> std::hex >> counter;
-        for (int i = 0; i < 3; ++i) {
-          std::cout << "Nonce " << i << ": ";
-          std::cin >> std::hex >> nonce[i];
-        }
-        chacha = new ChaCha20(key, counter, nonce);
-        std::cout << "Values introduced successfully.\n";
-        break;
+        
+      // Show results
       case 2:
         system("clear");
-        std::cout << "Input file name: ";
-        std::cin >> filename;
-        ReadFromFile(filename, key, counter, nonce);
-        chacha = new ChaCha20(key, counter, nonce);
-        std::cout << "File read successfully.\n";
+        std::cout << "- Estado inicial:\n";
+        PrintState(chacha.GetState());
+        chacha.RunRounds(output);
+        std::cout << "- Estado tras 20 rondas:\n";
+        PrintState(output);
+        chacha.GenerateBlock(output);
+        std::cout << "- Estado de salida del generador:\n";
+        PrintState(output);
         break;
+      // Save results to file
       case 3:
-        system("clear");
-        if (chacha == nullptr) {
-          std::cout << "ERROR: No values introduced.\n";
-          break;
-        }
-        std::cout << "Output file name: ";
-        std::cin >> filename;
-        chacha->SaveResultsToFile(filename);
-        std::cout << "Results saved to file.\n";
-        break;
+        
       case 4:
         system("clear");
         Help();
         break;
       case 0:
-        std::cout << "Exiting...\n";
-        return 0;
+        std::cout << "Exiting program." << std::endl;
+        break;
       default:
-        std::cout << "Invalid option.\n";
+        std::cerr << "ERROR: Invalid option." << std::endl;
+        break;
     }
   } while (option != 0);
-  delete chacha;
   return 0;
 }
