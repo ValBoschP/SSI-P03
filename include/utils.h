@@ -10,5 +10,8 @@
 void Menu();
 void Help();
 void PrintState(const std::array<uint32_t, kStateSize>& state);
+uint32_t ToLittleEndian(const std::vector<uint8_t>& bytes, size_t start);
+ChaCha20 ReadChaCha20Input(const std::string& filename);
+void SaveChaCha20Output(ChaCha20& chacha);
 
-#endif
+#endif // UTILS_H
