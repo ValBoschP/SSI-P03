@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -Wl,--export-dynamic -rdynamic CMakeFiles/CHACHA20.dir/main.cc.o CMakeFiles/CHACHA20.dir/chacha20.cc.o CMakeFiles/CHACHA20.dir/utils.cc.o -o ../bin/CHACHA20 
