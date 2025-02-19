@@ -116,6 +116,8 @@ ChaCha20 ReadChaCha20Input(const std::string& filename) {
   for (size_t i = 0; i < kNonceSize; ++i) {
     nonce[i] = ToLittleEndian(byte_values, kKeySize * 4 + 4 + i * 4);
   }
+
+  std::cout << "Data read from file " << filename << " successfully.\n";
   return ChaCha20(key, counter, nonce);
 }
 

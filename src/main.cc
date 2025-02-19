@@ -25,6 +25,7 @@ int main() {
     std::cin >> option;
     switch (option) {
       case 1:
+        system("clear");
         std::cout << "Enter the filename: ";
         std::cin >> filename;
         chacha = ReadChaCha20Input(filename);
@@ -43,6 +44,7 @@ int main() {
         break;
 
       case 3:
+        system("clear");
         SaveChaCha20Output(chacha);
         break;
         

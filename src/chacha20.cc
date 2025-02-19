@@ -29,11 +29,15 @@ void ChaCha20::QuarterRound(uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d) 
 
 // Modificación
 void ChaCha20::QuarterRoundRandom(uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d) {
-  int random_number;
-  a += b; d ^= a; d = RotateLeft(d, random_number);
-  c += d; b ^= c; b = RotateLeft(b, random_number);
-  a += b; d ^= a; d = RotateLeft(d, random_number);
-  c += d; b ^= c; b = RotateLeft(b, random_number);
+  std::array<int, 4> random_order = {7, 8, 12, 16};
+  std::random_device rd;
+  std::mt19937 g(rd());
+  std::shuffle(random_order.begin(), random_order.end(), g);
+
+  a += b; d ^= a; d = RotateLeft(d, random_order[0]);
+  c += d; b ^= c; b = RotateLeft(b, random_order[1]);
+  a += b; d ^= a; d = RotateLeft(d, random_order[2]);
+  c += d; b ^= c; b = RotateLeft(b, random_order[3]);
 }
 
 void ChaCha20::InnerBlockRandom(std::array<uint32_t, kStateSize>& state) {
