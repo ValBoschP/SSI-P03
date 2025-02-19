@@ -50,7 +50,17 @@ int main() {
         system("clear");
         Help();
         break;
-
+      // Modificación
+      case 5:
+        system("clear");
+        std::cout << "- Estado inicial:\n";
+        PrintState(chacha.GetState());
+        chacha.RunRoundsRandom(output);
+        std::cout << "- Estado tras 20 rondas:\n";
+        PrintState(output);
+        chacha.GenerateBlockRandom(output);
+        std::cout << "- Estado de salida del generador:\n";
+        PrintState(output);
       case 0:
         std::cout << "Exiting program." << std::endl;
         break;

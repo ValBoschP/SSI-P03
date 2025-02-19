@@ -14,6 +14,7 @@ void Menu() {
   std::cout << "2. Show results" << std::endl;
   std::cout << "3. Save results to file" << std::endl;
   std::cout << "4. Help" << std::endl;
+  std::cout << "5. Show results with random QR" << std::endl;
   std::cout << "0. Exit" << std::endl;
 }
 

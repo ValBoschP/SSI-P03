@@ -23,6 +23,12 @@ class ChaCha20 {
 
   const std::array<uint32_t, kStateSize>& GetState() const { return state_; }
 
+  // Modificación
+  void QuarterRoundRandom(uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d);
+  void InnerBlockRandom(std::array<uint32_t, kStateSize>& state);
+  void RunRoundsRandom(std::array<uint32_t, kStateSize>& output);
+  void GenerateBlockRandom(std::array<uint32_t, kStateSize>& output);
+  
  private:
   void QuarterRound(uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d);
   void InnerBlock(std::array<uint32_t, kStateSize>& state);

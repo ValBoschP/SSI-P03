@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/valer/SSI/SSI-P03/src/chacha20.cc" "src/CMakeFiles/CHACHA20.dir/chacha20.cc.o" "gcc" "src/CMakeFiles/CHACHA20.dir/chacha20.cc.o.d"
-  "/home/valer/SSI/SSI-P03/src/main.cc" "src/CMakeFiles/CHACHA20.dir/main.cc.o" "gcc" "src/CMakeFiles/CHACHA20.dir/main.cc.o.d"
-  "/home/valer/SSI/SSI-P03/src/utils.cc" "src/CMakeFiles/CHACHA20.dir/utils.cc.o" "gcc" "src/CMakeFiles/CHACHA20.dir/utils.cc.o.d"
+  "/home/valeria/repos/Clases/SSI/SSI-P03/src/chacha20.cc" "src/CMakeFiles/CHACHA20.dir/chacha20.cc.o" "gcc" "src/CMakeFiles/CHACHA20.dir/chacha20.cc.o.d"
+  "/home/valeria/repos/Clases/SSI/SSI-P03/src/main.cc" "src/CMakeFiles/CHACHA20.dir/main.cc.o" "gcc" "src/CMakeFiles/CHACHA20.dir/main.cc.o.d"
+  "/home/valeria/repos/Clases/SSI/SSI-P03/src/utils.cc" "src/CMakeFiles/CHACHA20.dir/utils.cc.o" "gcc" "src/CMakeFiles/CHACHA20.dir/utils.cc.o.d"
   )
 
 # Targets to which this target links.
